@@ -2,19 +2,19 @@
 
 基于 [photoshop-script-api](https://github.com/emptykid/photoshop-script-api) 的 Photoshop CEP 面板插件模板项目。可从此模板复制后快速启动任何 CEP 面板插件项目。
 
-## 功能特性
+## 模板骨架包含
 
-- **最小骨架**：面板正常加载、调试面板可用、Toast 提示、状态栏
-- **完整通信链**：DocInfo 展示 面板→bridge→hostscript 完整调用示例
-- **多格式导出**：PNG、JPG、BMP 图层导出（内置 photoshop-script-api）
-- **非破坏性操作**：自动保存/恢复历史状态，不影响文档
-- **自动化安装**：一键安装脚本，自动检测 PS 版本、开启调试模式
-- **跨平台打包**：支持生成 Windows/macOS 安装程序和卸载程序
+- **最小面板**：Vue app 正常加载、调试面板可用、Toast 提示、状态栏
+- **完整通信链示例**：DocInfo 展示 面板→bridge→hostscript 完整调用链
+- **宿主脚本骨架**：`$.HostScript` 注册机制 + `getDocumentInfo` 示例
+- **自动化脚本**：安装/卸载/打包/发布（`pkg` 生成独立可执行文件）
+- **参考资源**：ps-api 完整库 + psdoc PS 脚本参考文档
+- **跨平台**：支持 Windows/macOS，PS 2019 (v20.0) 及以上
 
-### 开发辅助
+### 开发工具
 
-- **Toast 提示**：操作反馈动画提示
 - **调试面板**：内置可收起的通信日志查看器（含耗时显示）
+- **Toast 提示**：操作反馈动画提示
 
 ## 技术栈
 
