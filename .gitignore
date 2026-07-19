@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.vscode/
+*.log
+.DS_Store
+Thumbs.db
+__pycache__/
+.claude/settings.local.json
+installer/
+.installer-temp/
+.zip-temp/

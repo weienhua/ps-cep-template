@@ -1,0 +1,46 @@
+{
+  "name": "ps-cep-template",
+  "version": "1.0.0",
+  "description": "Photoshop CEP 面板模板项目",
+  "scripts": {
+    "build": "npm run build:jsx && npm run build:panel",
+    "build:jsx": "webpack --config webpack.config.jsx.js",
+    "build:jsx:prod": "webpack --config webpack.config.jsx.js --mode=production",
+    "build:panel": "webpack",
+    "build:panel:prod": "webpack --mode=production",
+    "dev": "concurrently -k -n panel,jsx \"npm run dev:panel\" \"npm run dev:jsx\"",
+    "dev:panel": "webpack --watch",
+    "dev:jsx": "webpack --config webpack.config.jsx.js --watch",
+    "clean": "rimraf dist installer",
+    "package": "npm run build:jsx:prod && npm run build:panel:prod && node scripts/build-installer.js",
+    "release": "node scripts/release.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@vue/compiler-sfc": "^3.5.39",
+    "concurrently": "^9.1.2",
+    "copy-webpack-plugin": "^11.0.0",
+    "css-loader": "^7.1.4",
+    "pkg": "^5.8.1",
+    "ps-extendscript-types": "^1.0.2",
+    "rimraf": "^5.0.0",
+    "style-loader": "^4.0.0",
+    "ts-loader": "^9.4.0",
+    "typescript": "~4.9.5",
+    "vue-loader": "^17.4.2",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.0"
+  },
+  "keywords": [
+    "photoshop",
+    "cep",
+    "extendscript",
+    "plugin"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "cep-shim": "^4.5.12",
+    "extendscript-es5-shim": "^0.3.1",
+    "vue": "^3.5.39"
+  }
+}
