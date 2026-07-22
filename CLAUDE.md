@@ -116,7 +116,7 @@ Promise<PSResult<T>>
   // ✗ 错误写法
   if (obj.hasKey(s2t("red"))) { ... }
   else if (obj.hasKey(s2t("redFloat"))) { ... }
-
+  
   // ✓ 正确写法
   var hasRed = obj.hasKey(s2t("red"));
   var hasRedFloat = obj.hasKey(s2t("redFloat"));
@@ -143,9 +143,24 @@ Promise<PSResult<T>>
 ### 宿主脚本约定
 
 - **ps-api 优先**：宿主脚本中需要 PS 操作时，优先查阅 `src/jsx/ps-api/API.md` 是否已有封装方法（如 `exportToBMP`、`duplicateToDocument`、`History.saveState` 等），这些方法经过验证可直接使用
+
+- **ps-api 导入统一入口**：所有 ps-api 类（`Document`、`Layer`、`Text`、`SolidColor` 等）必须从 `src/jsx/ps-api/src/index.ts` 统一导入，**禁止**从 `src/jsx/ps-api/src/lib/` 子路径单独导入。单独导入会导致 webpack 模块路径解析不一致，引发整个 hostscript 运行时 `EvalScript error`。
+
+  ```typescript
+  // ✓ 正确写法
+  import { Document, Layer, Text, SolidColor } from "../ps-api/src/index";
+  
+  // ✗ 错误写法 — 会导致 webpack 模块冲突，hostscript 全部报错
+  import { Document } from "../ps-api/src/lib/Document";
+  import { Layer } from "../ps-api/src/lib/Layer";
+  ```
+
 - 若 ps-api 无对应方法，再查阅 `psdoc/references/` 中的 ActionManager 脚本示例和 API 文档作为参考
+
 - 仅在两者都无现成方案时才从零编写 ActionManager 代码
+
 - 所有通过 `$.HostScript` 暴露的函数必须是**全局函数**，返回值只能是**字符串**
+
 - 返回值约定：
   - 正常结果 → JSON 字符串
   - `"__OK__"` → 操作成功（无返回值）
